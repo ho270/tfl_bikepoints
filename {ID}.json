@@ -1,0 +1,1 @@
+{"$type": "Tfl.Api.Presentation.Entities.ApiError, Tfl.Api.Presentation.Entities", "timestampUtc": "2026-04-29T13:55:34.3730625Z", "exceptionType": "EntityNotFoundException", "httpStatusCode": 404, "httpStatus": "NotFound", "relativeUri": "/BikePoint/%7BID%7D", "message": "The following bike point id is not recognised: {ID}"}
