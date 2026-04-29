@@ -6,20 +6,17 @@ import json
 from datetime import datetime
 
 #variables
-ID = 'BikePoints_888'
-URL = f'https://api.tfl.gov.uk/BikePoint/{ID}'
+URL = 'https://api.tfl.gov.uk/BikePoint'
 response = requests.get(URL)
 data = response.json()
-error_message = data.get("message", "no message given")
+
+number_of_ids = len(response.json())
+
+#error_message = data.get("message", "no message given")
 timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-file_name = f'{ID}_{timestamp}'
 
-with open(f"{ID}.json", "w") as file:
-    json.dump(data, file)
-
-#Response message
-if response.status_code != 200:
-    print(f"Error creating {file_name}: {response.status_code} {error_message}")
-
-else:
-    print(f"File {file_name} was successfully created! Woohoo!")
+#loop through IDs
+for i in range(number_of_ids):
+    ID = data[i]['id']
+    with open(f"{ID}.json", "w") as file:
+        json.dump(data, file)
