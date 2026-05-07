@@ -38,7 +38,7 @@ s3_client = boto3.client(
     aws_secret_access_key = aws_secret
 )
 
-#create data directory
+#read in JSON from the data directory
 data_dir = Path('data')
 files = list(data_dir.glob(f'*.json'))
 

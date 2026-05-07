@@ -1,58 +1,27 @@
 # pylint: skip-file
 
-#libraries
-import requests
-import json
-from datetime import datetime
-import time
+#Imports
+from modules.setup_logging import setup_logging
+from modules.extract_function import extract
+from modules.load_function import load
 import os
-import logging
+from pathlib import Path
+from dotenv import load_dotenv
 
-#logging configuration
-log_dir = 'logs'
-os.makedirs(log_dir,exist_ok=True)
-timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-log_filename = f'{log_dir}/{timestamp}.log'
+#configure logging
+logger = setup_logging('logs')
 
-logging.basicConfig(
-    filename=log_filename,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    level=logging.INFO
-)
+#API url required for extract function
+url = 'https://api.tfl.gov.uk/BikePoint'
 
-log = logging.getLogger()
-log.info('Logger intialised')
+load_dotenv()
+aws_key = os.getenv('AWS_KEY_ID')
+aws_secret = os.getenv('AWS_SECRET_KEY')
+bucket = os.getenv('AWS_BUCKET')
 
-#variables
-URL = 'https://api.tfl.gov.uk/BikePoint'
-response = requests.get(URL)
-status = response.status_code
-data = response.json()
-
-count = 0
-max_tries = 3
-
-while count < max_tries:
-
-    if 200 <= status < 300:
-        dir ='data'
-        os.makedirs(dir,exist_ok=True)
-        filename = f"{dir}/{timestamp}.json"
-        with open(filename, "w") as file:
-            json.dump(data,file)
-        
-        print(f"File {filename} was successfully created")
-        log.info(f"File {filename} was successfully created")
-        break
-
-    elif 500 <= status < 600:
-        #retry for these status codes for 10 seconds
-        time.sleep(10)
-        count +=1
-        print(f"Trying again. Attempt {count}")
-        log.info(f"Trying again. Attempt {count}")
-
-    else:
-        print(f"Error: {status} {data.get("message", "no message found")}")
-        log.info(f"Error: {status} {data.get("message", "no message found")}")
-        break
+if extract(url, 3, 'data'):
+    data_dir = Path('data')
+    load(aws_key, aws_secret, bucket, data_dir)
+    logger.info('Scripts ran successfully')
+else:
+    logger.error('Extract failed. Script stopped.')
