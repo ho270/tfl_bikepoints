@@ -35,10 +35,10 @@ def load(AWS_KEY_ID, AWS_SECRET_KEY, BUCKET, data_dir):
         filename = os.path.basename(file)
 
         try:
-            s3_client.upload_file(file,bucket,filename)
+            s3_client.upload_file(file,BUCKET,filename)
             logger.info(f'{file} uploaded to S3')
             print(f'{file} uploaded to S3')
-            s3_client.head_object(Bucket=bucket,Key=filename)
+            s3_client.head_object(Bucket=BUCKET,Key=filename)
             os.remove(file)
             logger.info(f'{file} deleted locally from {data_dir}')
             print(f'{file} deleted locally from {data_dir}')
