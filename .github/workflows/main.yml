@@ -1,4 +1,4 @@
-name: Bike Point Ingestion
+name: bike-point-ingestion
 
 on:
   schedule:
@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    environment: Bike Point Environment Variables
+    environment: bike-point
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
