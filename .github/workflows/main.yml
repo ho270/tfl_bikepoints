@@ -20,7 +20,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: run script
         env:
-          AWS_KEY_ID: ${{secrets.AWS_KEY_ID}}
-          AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
-          BUCKET: ${{secrets.BUCKET}}
+          AWS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          BUCKET: ${{ secrets.BUCKET }}
         run: python main.py
