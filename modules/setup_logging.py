@@ -2,7 +2,7 @@
 
 #imports
 import os
-import datetime
+from datetime import datetime
 import logging
 
 #Function
@@ -16,11 +16,11 @@ def setup_logging(log_dir):
 
     os.makedirs(log_dir,exist_ok=True)
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    log_filename = os.path.join(f'{log_dir},{timestamp}.log')
+    log_filename = os.path.join(log_dir,f'{timestamp}.log')
 
     logging.basicConfig(
         filename=log_filename,
-        format='%(asctime)s - %(names)s - %(levelname)s - %(message)s',
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         level=logging.INFO
     )
 

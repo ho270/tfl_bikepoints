@@ -1,15 +1,15 @@
 # pylint: skip-file
 
 #imports
-import logging
 import requests
+import json
 from datetime import datetime
 import time
-import json
 import os
+import logging
 
 #log the name of the file in the logs
-log = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 #Function
 def extract(url,max_tries, dir):
@@ -41,7 +41,7 @@ def extract(url,max_tries, dir):
                 json.dump(data,file)
             
             print(f"File {filename} was successfully created")
-            log.info(f"File {filename} was successfully created")
+            logger.info(f"File {filename} was successfully created")
             return True
             break
 
@@ -50,9 +50,9 @@ def extract(url,max_tries, dir):
             time.sleep(10)
             count +=1
             print(f"Trying again. Attempt {count}")
-            log.info(f"Trying again. Attempt {count}")
+            logger.info(f"Trying again. Attempt {count}")
 
         else:
             print(f"Error: {status} {data.get("message", "no message found")}")
-            log.info(f"Error: {status} {data.get("message", "no message found")}")
+            logger.info(f"Error: {status} {data.get("message", "no message found")}")
             break
