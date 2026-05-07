@@ -10,6 +10,9 @@ from dotenv import load_dotenv
 
 #configure logging
 logger = setup_logging('logs')
+# log_dir = os.path.join()
+# logger = setup_logging(log_dir)
+# logger.info('Logging initialized')
 
 #API url required for extract function
 url = 'https://api.tfl.gov.uk/BikePoint'
