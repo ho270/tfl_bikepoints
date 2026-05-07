@@ -18,13 +18,13 @@ logger = setup_logging('logs')
 url = 'https://api.tfl.gov.uk/BikePoint'
 
 load_dotenv()
-aws_key = os.getenv('AWS_KEY_ID')
-aws_secret = os.getenv('AWS_SECRET_KEY')
-bucket = os.getenv('AWS_BUCKET')
+AWS_KEY_ID = os.getenv('AWS_KEY_ID')
+AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
+BUCKET = os.getenv('BUCKET')
 
 if extract(url, 3, 'data'):
     data_dir = Path('data')
-    load(aws_key, aws_secret, bucket, data_dir)
+    load(AWS_KEY_ID, AWS_SECRET_KEY, BUCKET, data_dir)
     logger.info('Scripts ran successfully')
     print('Scripts ran successfully')
 else:

@@ -8,7 +8,7 @@ import os
 logger = logging.getLogger(__name__)
 
 #Function
-def load(aws_key, aws_secret, bucket, data_dir):
+def load(AWS_KEY_ID, AWS_SECRET_KEY, BUCKET, data_dir):
     """This will load any json files in the data directory to a specified S3 bucket.
 
 
@@ -22,8 +22,8 @@ def load(aws_key, aws_secret, bucket, data_dir):
     #set up AWS client
     s3_client = boto3.client(
         's3',
-        aws_access_key_id = aws_key,
-        aws_secret_access_key = aws_secret
+        aws_access_key_id = AWS_KEY_ID,
+        aws_secret_access_key = AWS_SECRET_KEY
     )
 
     #read in JSON from the data directory
