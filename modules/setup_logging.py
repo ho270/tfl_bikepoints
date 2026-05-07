@@ -16,7 +16,7 @@ def setup_logging(log_dir):
 
     os.makedirs(log_dir,exist_ok=True)
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    log_filename = f'{log_dir}/{timestamp}.log'
+    log_filename = os.path.join(f'{log_dir},{timestamp}.log')
 
     logging.basicConfig(
         filename=log_filename,
