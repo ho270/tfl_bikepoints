@@ -26,5 +26,7 @@ if extract(url, 3, 'data'):
     data_dir = Path('data')
     load(aws_key, aws_secret, bucket, data_dir)
     logger.info('Scripts ran successfully')
+    print('Scripts ran successfully')
 else:
     logger.error('Extract failed. Script stopped.')
+    print('Extract failed. Script stopped.')

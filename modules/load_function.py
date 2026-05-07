@@ -37,11 +37,15 @@ def load(aws_key, aws_secret, bucket, data_dir):
         try:
             s3_client.upload_file(file,bucket,filename)
             logger.info(f'{file} uploaded to S3')
+            print(f'{file} uploaded to S3')
             s3_client.head_object(Bucket=bucket,Key=filename)
             os.remove(file)
             logger.info(f'{file} deleted locally from {data_dir}')
+            print(f'{file} deleted locally from {data_dir}')
             processed +=1
         except Exception as e:
                 logger.error(e)
+                print(e)
 
     logger.info(f'Finished uploading {processed} files')
+    print(f'Finished uploading {processed} files')
