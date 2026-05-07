@@ -35,6 +35,7 @@ max_tries = 3
 while count < max_tries:
 
     if 200 <= status < 300:
+        #create data directory
         dir ='data'
         os.makedirs(dir,exist_ok=True)
         filename = f"{dir}/{timestamp}.json"
